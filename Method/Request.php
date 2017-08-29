@@ -1,34 +1,34 @@
 <?php
 namespace GDO\Friends\Method;
 
-use GDO\Core\GDO_Hook;
-use GDO\Form\GDO_AntiCSRF;
-use GDO\Form\GDO_Form;
-use GDO\Form\GDO_Submit;
+use GDO\Core\GDT_Hook;
+use GDO\Form\GDT_AntiCSRF;
+use GDO\Form\GDT_Form;
+use GDO\Form\GDT_Submit;
 use GDO\Form\MethodForm;
 use GDO\Friends\FriendRequest;
 use GDO\Friends\Friendship;
-use GDO\Friends\GDO_FriendRelation;
+use GDO\Friends\GDT_FriendRelation;
 use GDO\Friends\Module_Friends;
 use GDO\Mail\Mail;
-use GDO\UI\GDO_Link;
-use GDO\User\GDO_User;
+use GDO\UI\GDT_Link;
+use GDO\User\GDT_User;
 use GDO\User\User;
-use GDO\Form\GDO_Validator;
+use GDO\Form\GDT_Validator;
 
 final class Request extends MethodForm
 {
 	public function isGuestAllowed() { return Module_Friends::instance()->cfgGuestFriendships(); }
 	
-	public function createForm(GDO_Form $form)
+	public function createForm(GDT_Form $form)
 	{
 		$gdo = FriendRequest::table();
 		$form->addFields(array(
-			GDO_User::make('frq_friend')->notNull(),
-		    GDO_Validator::make()->validator('frq_friend', [$this, 'validate_NoRelation']),
+			GDT_User::make('frq_friend')->notNull(),
+		    GDT_Validator::make()->validator('frq_friend', [$this, 'validate_NoRelation']),
 			$gdo->gdoColumn('frq_relation'),
-			GDO_Submit::make(),
-			GDO_AntiCSRF::make(),
+			GDT_Submit::make(),
+			GDT_AntiCSRF::make(),
 		));
 	}
 	
@@ -38,7 +38,7 @@ final class Request extends MethodForm
 		return Module_Friends::instance()->renderTabs()->add($response);
 	}
 	
-	public function validate_NoRelation(GDO_Form $form, GDO_User $field)
+	public function validate_NoRelation(GDT_Form $form, GDT_User $field)
 	{
 		$user = User::current();
 		$friend = $field->getUser();
@@ -64,14 +64,14 @@ final class Request extends MethodForm
 		return true;
 	}
 	
-	public function formValidated(GDO_Form $form)
+	public function formValidated(GDT_Form $form)
 	{
 		$user = User::current();
 		$request = FriendRequest::blank($form->getFormData())->setVar('frq_user', $user->getID())->insert();
 		
 		$this->sendMail($request);
 		
-		GDO_Hook::call('FriendsRequest', $request);
+		GDT_Hook::call('FriendsRequest', $request);
 		
 		return $this->message('msg_friend_request_sent');
 	}
@@ -84,11 +84,11 @@ final class Request extends MethodForm
 		
 		$friend = $request->getFriend();
 		$user = $request->getUser();
-		$relation = GDO_FriendRelation::displayRelation($request->getRelation());
+		$relation = GDT_FriendRelation::displayRelation($request->getRelation());
 		$sitename = sitename();
 		$append = "&from={$user->getID()}&for={$friend->getID()}&token={$request->gdoHashcode()}";
-		$linkAccept = GDO_Link::anchor(url('Friends', 'Accept', $append));
-		$linkDeny = GDO_Link::anchor(url('Friends', 'Deny', $append));
+		$linkAccept = GDT_Link::anchor(url('Friends', 'Accept', $append));
+		$linkDeny = GDT_Link::anchor(url('Friends', 'Deny', $append));
 		
 		$mail->setSubject(tusr($friend, 'mail_subj_friend_request', [$sitename, $user->displayNameLabel()]));
 		$args = [$friend->displayNameLabel(), $user->displayNameLabel(), $relation, $sitename, $linkAccept, $linkDeny];

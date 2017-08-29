@@ -4,7 +4,7 @@ namespace GDO\Friends\Method;
 use GDO\DB\GDO;
 use GDO\Friends\Friendship;
 use GDO\Friends\Module_Friends;
-use GDO\Table\GDO_List;
+use GDO\Table\GDT_List;
 use GDO\Table\MethodQueryList;
 use GDO\User\User;
 
@@ -17,10 +17,10 @@ final class FriendList extends MethodQueryList
 	
 	public function isGuestAllowed() { return Module_Friends::instance()->cfgGuestFriendships(); }
 	
-	public function gdoDecorateList(GDO_List $list)
+	public function gdoDecorateList(GDT_List $list)
 	{
 		$list->label('list_friends', [$list->countItems()]);
-// 		$list->itemTemplate(GDO_FriendshipItem::make());
+// 		$list->itemTemplate(GDT_FriendshipItem::make());
 	}
 	
 	public function gdoQuery()

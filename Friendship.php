@@ -2,9 +2,9 @@
 namespace GDO\Friends;
 
 use GDO\DB\GDO;
-use GDO\DB\GDO_CreatedAt;
-use GDO\Template\GDO_Template;
-use GDO\User\GDO_User;
+use GDO\DB\GDT_CreatedAt;
+use GDO\Template\GDT_Template;
+use GDO\User\GDT_User;
 use GDO\User\User;
 
 final class Friendship extends GDO
@@ -13,10 +13,10 @@ final class Friendship extends GDO
 	public function gdoColumns()
 	{
 		return array(
-			GDO_User::make('friend_user')->primary(),
-			GDO_User::make('friend_friend')->primary(),
-			GDO_FriendRelation::make('friend_relation')->notNull(),
-			GDO_CreatedAt::make('friend_created'),
+			GDT_User::make('friend_user')->primary(),
+			GDT_User::make('friend_friend')->primary(),
+			GDT_FriendRelation::make('friend_relation')->notNull(),
+			GDT_CreatedAt::make('friend_created'),
 		);
 	}
 	
@@ -35,10 +35,10 @@ final class Friendship extends GDO
 	public function getCreated() { return $this->getVar('friend_created'); }
 	public function getRelation() { return $this->getVar('friend_relation'); }
 
-	public function displayRelation() { return GDO_FriendRelation::displayRelation($this->getRelation()); }
+	public function displayRelation() { return GDT_FriendRelation::displayRelation($this->getRelation()); }
 	
-	public function renderList() { return GDO_Template::php('Friends', 'listitem/friendship.php', ['gdo' => $this]); }
-	public function renderCard() { return GDO_Template::responsePHP('Friends', 'card/friendship.php', ['gdo' => $this]); }
+	public function renderList() { return GDT_Template::php('Friends', 'listitem/friendship.php', ['gdo' => $this]); }
+	public function renderCard() { return GDT_Template::responsePHP('Friends', 'card/friendship.php', ['gdo' => $this]); }
 	
 	##############
 	### Static ###

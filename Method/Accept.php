@@ -3,7 +3,7 @@ namespace GDO\Friends\Method;
 
 use GDO\Friends\FriendRequest;
 use GDO\Friends\Friendship;
-use GDO\Friends\GDO_FriendRelation;
+use GDO\Friends\GDT_FriendRelation;
 use GDO\Friends\MethodFriendRequest;
 
 final class Accept extends MethodFriendRequest
@@ -19,7 +19,7 @@ final class Accept extends MethodFriendRequest
 		$forHisFriend = Friendship::blank(array(
 			'friend_user' => $request->getFriendID(),
 			'friend_friend' => $request->getUserID(),
-			'friend_relation' => GDO_FriendRelation::reverseRelation($request->getRelation()),
+			'friend_relation' => GDT_FriendRelation::reverseRelation($request->getRelation()),
 		))->insert();
 		return $this->message('msg_friends_accepted');
 	}

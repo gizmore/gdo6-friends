@@ -1,7 +1,7 @@
 <?php
 use GDO\Avatar\Avatar;
 use GDO\Friends\Friendship;
-use GDO\UI\GDO_IconButton;
+use GDO\UI\GDT_IconButton;
 
 $gdo instanceof Friendship;
 $friendship = $gdo;
@@ -13,5 +13,5 @@ $friend = $friendship->getFriend();
     <h3><?= $friend->displayName(); ?></h3>
     <p><?= t('friend_relation_since', [$friendship->displayRelation(), tt($friendship->getCreated())]); ?></p>
   </div>
-  <?= GDO_IconButton::make()->icon('delete')->href(href('Friends', 'Remove', '&friend='.$friend->getID())); ?>
+  <?= GDT_IconButton::make()->icon('delete')->href(href('Friends', 'Remove', '&friend='.$friend->getID())); ?>
 </md-list-item>

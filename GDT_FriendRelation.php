@@ -2,9 +2,9 @@
 namespace GDO\Friends;
 
 use GDO\Core\GDOError;
-use GDO\Form\GDO_Enum;
+use GDO\Form\GDT_Enum;
 
-final class GDO_FriendRelation extends GDO_Enum
+final class GDT_FriendRelation extends GDT_Enum
 {
 	public static $TYPES = array(
 		'friend' => 'friend',

@@ -2,11 +2,11 @@
 namespace GDO\Friends;
 
 use GDO\Core\Module;
-use GDO\Date\GDO_Duration;
+use GDO\Date\GDT_Duration;
 use GDO\Date\Time;
-use GDO\Template\GDO_Bar;
-use GDO\Type\GDO_Checkbox;
-use GDO\Type\GDO_Int;
+use GDO\Template\GDT_Bar;
+use GDO\Type\GDT_Checkbox;
+use GDO\Type\GDT_Int;
 /**
  * Friendship and user relation module
  * 
@@ -35,16 +35,16 @@ final class Module_Friends extends Module
 	public function getUserSettings()
 	{
 		return array(
-			GDO_Checkbox::make('friendship_guests')->initial('0'),
-			GDO_Int::make('friendship_level')->unsigned()->initial('0'),
+			GDT_Checkbox::make('friendship_guests')->initial('0'),
+			GDT_Int::make('friendship_level')->unsigned()->initial('0'),
 		);
 	}
 	
 	public function getConfig()
 	{
 		return array(
-			GDO_Checkbox::make('friendship_guests')->initial('0'),
-			GDO_Duration::make('friendship_cleanup_age')->initial(Time::ONE_DAY),
+			GDT_Checkbox::make('friendship_guests')->initial('0'),
+			GDT_Duration::make('friendship_cleanup_age')->initial(Time::ONE_DAY),
 		);
 	}
 	public function cfgGuestFriendships() { return $this->getConfigValue('friendship_guests'); }
@@ -58,7 +58,7 @@ final class Module_Friends extends Module
 		return $this->templatePHP('tabs.php');
 	}
 
-	public function hookRightBar(GDO_Bar $navbar)
+	public function hookRightBar(GDT_Bar $navbar)
 	{
 		$this->templatePHP('rightbar.php', ['navbar' => $navbar]);
 	}
