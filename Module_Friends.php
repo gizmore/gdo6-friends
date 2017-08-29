@@ -1,20 +1,20 @@
 <?php
 namespace GDO\Friends;
 
-use GDO\Core\Module;
+use GDO\Core\GDO_Module;
 use GDO\Date\GDT_Duration;
 use GDO\Date\Time;
 use GDO\Template\GDT_Bar;
 use GDO\Type\GDT_Checkbox;
 use GDO\Type\GDT_Int;
 /**
- * Friendship and user relation module
+ * GDO_Friendship and user relation module
  * 
  * @author gizmore
  * @version 6.0
  * @since 5.0
  */
-final class Module_Friends extends Module
+final class Module_Friends extends GDO_Module
 {
 	##############
 	### Module ###
@@ -24,8 +24,8 @@ final class Module_Friends extends Module
 	public function getClasses()
 	{
 	    return array(
-	        'GDO\Friends\Friendship',
-	        'GDO\Friends\FriendRequest',
+	        'GDO\Friends\GDO_Friendship',
+	        'GDO\Friends\GDO_FriendRequest',
 	    );
 	}
 

@@ -2,11 +2,11 @@
 namespace GDO\Friends\Method;
 
 use GDO\DB\GDO;
-use GDO\Friends\FriendRequest;
+use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\Module_Friends;
 use GDO\Table\GDT_List;
 use GDO\Table\MethodQueryList;
-use GDO\User\User;
+use GDO\User\GDO_User;
 
 final class Requests extends MethodQueryList
 {
@@ -15,7 +15,7 @@ final class Requests extends MethodQueryList
 	/**
 	 * @return GDO
 	 */
-	public function gdoTable() { return FriendRequest::table(); }
+	public function gdoTable() { return GDO_FriendRequest::table(); }
 	
 	public function gdoDecorateList(GDT_List $list)
 	{
@@ -24,7 +24,7 @@ final class Requests extends MethodQueryList
 	
 	public function gdoQuery()
 	{
-		$user = User::current();
+		$user = GDO_User::current();
 		return $this->gdoTable()->select()->where("frq_friend={$user->getID()} AND frq_denied IS NULL");
 	}
 	

@@ -3,10 +3,10 @@ namespace GDO\Friends\Method;
 
 use GDO\Core\Method;
 use GDO\Core\Website;
-use GDO\Friends\Friendship;
+use GDO\Friends\GDO_Friendship;
 use GDO\Friends\Module_Friends;
 use GDO\Mail\Mail;
-use GDO\User\User;
+use GDO\User\GDO_User;
 use GDO\Util\Common;
 
 final class Remove extends Method
@@ -15,11 +15,11 @@ final class Remove extends Method
 	
 	public function execute()
 	{
-		$user = User::current();
+		$user = GDO_User::current();
 		
-		$friendship = Friendship::findById(Common::getRequestString('friend'), $user->getID());
+		$friendship = GDO_Friendship::findById(Common::getRequestString('friend'), $user->getID());
 		$friendship->delete();
-		$friendship = Friendship::findById($user->getID(), Common::getRequestString('friend'));
+		$friendship = GDO_Friendship::findById($user->getID(), Common::getRequestString('friend'));
 		$friendship->delete();
 		$this->sendMail($friendship);
 		
@@ -30,9 +30,9 @@ final class Remove extends Method
 		return $tabs->add($response)->add($redirect);
 	}
 	
-	private function sendMail(Friendship $friendship)
+	private function sendMail(GDO_Friendship $friendship)
 	{
-		$user = User::current();
+		$user = GDO_User::current();
 		$friend = $friendship->getFriend();
 		$sitename = sitename();
 		$mail = Mail::botMail();

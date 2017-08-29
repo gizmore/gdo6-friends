@@ -3,15 +3,15 @@ namespace GDO\Friends\Method;
 
 use GDO\Core\Website;
 use GDO\Date\Time;
-use GDO\Friends\FriendRequest;
+use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\MethodFriendRequest;
 use GDO\Friends\Module_Friends;
 use GDO\Mail\Mail;
-use GDO\User\User;
+use GDO\User\GDO_User;
 
 final class Deny extends MethodFriendRequest
 {
-	public function executeWithRequest(FriendRequest $request)
+	public function executeWithRequest(GDO_FriendRequest $request)
 	{
 		$request->saveVar('frq_denied', Time::getDate());
 		
@@ -24,10 +24,10 @@ final class Deny extends MethodFriendRequest
 		return $tabs->add($response)->add($redirect);
 	}
 	
-	private function sendMail(FriendRequest $request)
+	private function sendMail(GDO_FriendRequest $request)
 	{
 		$sitename = sitename();
-		$user = User::current();
+		$user = GDO_User::current();
 		$username = $user->displayNameLabel();
 		$friend = $request->getFriend();
 		

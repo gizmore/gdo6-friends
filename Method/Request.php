@@ -6,14 +6,14 @@ use GDO\Form\GDT_AntiCSRF;
 use GDO\Form\GDT_Form;
 use GDO\Form\GDT_Submit;
 use GDO\Form\MethodForm;
-use GDO\Friends\FriendRequest;
-use GDO\Friends\Friendship;
+use GDO\Friends\GDO_FriendRequest;
+use GDO\Friends\GDO_Friendship;
 use GDO\Friends\GDT_FriendRelation;
 use GDO\Friends\Module_Friends;
 use GDO\Mail\Mail;
 use GDO\UI\GDT_Link;
 use GDO\User\GDT_User;
-use GDO\User\User;
+use GDO\User\GDO_User;
 use GDO\Form\GDT_Validator;
 
 final class Request extends MethodForm
@@ -22,7 +22,7 @@ final class Request extends MethodForm
 	
 	public function createForm(GDT_Form $form)
 	{
-		$gdo = FriendRequest::table();
+		$gdo = GDO_FriendRequest::table();
 		$form->addFields(array(
 			GDT_User::make('frq_friend')->notNull(),
 		    GDT_Validator::make()->validator('frq_friend', [$this, 'validate_NoRelation']),
@@ -40,17 +40,17 @@ final class Request extends MethodForm
 	
 	public function validate_NoRelation(GDT_Form $form, GDT_User $field)
 	{
-		$user = User::current();
+		$user = GDO_User::current();
 		$friend = $field->getUser();
 		if ($friend->getID() === $user->getID())
 		{
 			return $field->error('err_friend_self');
 		}
-		if (Friendship::areRelated($user, $friend))
+		if (GDO_Friendship::areRelated($user, $friend))
 		{
 			return $field->error('err_already_related', [$friend->displayNameLabel()]);
 		}
-		if ($request = FriendRequest::getPendingFor($user, $friend))
+		if ($request = GDO_FriendRequest::getPendingFor($user, $friend))
 		{
 			if ($request->isDenied())
 			{
@@ -66,8 +66,8 @@ final class Request extends MethodForm
 	
 	public function formValidated(GDT_Form $form)
 	{
-		$user = User::current();
-		$request = FriendRequest::blank($form->getFormData())->setVar('frq_user', $user->getID())->insert();
+		$user = GDO_User::current();
+		$request = GDO_FriendRequest::blank($form->getFormData())->setVar('frq_user', $user->getID())->insert();
 		
 		$this->sendMail($request);
 		
@@ -76,7 +76,7 @@ final class Request extends MethodForm
 		return $this->message('msg_friend_request_sent');
 	}
 	
-	private function sendMail(FriendRequest $request)
+	private function sendMail(GDO_FriendRequest $request)
 	{
 		$mail = new Mail();
 		$mail->setSender(GWF_BOT_EMAIL);

@@ -1,17 +1,17 @@
 <?php
-use GDO\Avatar\Avatar;
-use GDO\Friends\FriendRequest;
+use GDO\Avatar\GDO_Avatar;
+use GDO\Friends\GDO_FriendRequest;
 use GDO\UI\GDT_IconButton;
-use GDO\User\User;
+use GDO\User\GDO_User;
 
-$gdo instanceof FriendRequest;
+$gdo instanceof GDO_FriendRequest;
 $friendship = $gdo;
 $friend = $friendship->getFriend();
-$user = User::current();
+$user = GDO_User::current();
 if ($friendship->isFrom($user)) :
 ?>
 <md-list-item class="md-2-line">
-  <?= Avatar::renderAvatar($friend); ?>
+  <?= GDO_Avatar::renderAvatar($friend); ?>
   <div class="md-list-item-text" layout="column">
     <h3><?= $friend->displayName(); ?></h3>
     <p><?= t('friend_request_to', [$friendship->displayRelation(), tt($friendship->getCreated())]); ?></p>
@@ -20,7 +20,7 @@ if ($friendship->isFrom($user)) :
 </md-list-item>
 <?php else : ?>
 <md-list-item class="md-2-line">
-  <?= Avatar::renderAvatar($friend); ?>
+  <?= GDO_Avatar::renderAvatar($friend); ?>
   <div class="md-list-item-text" layout="column">
     <h3><?= $friendship->getUser()->displayName(); ?></h3>
     <p><?= t('friend_request_from', [$friendship->displayRelation(), tt($friendship->getCreated())]); ?></p>

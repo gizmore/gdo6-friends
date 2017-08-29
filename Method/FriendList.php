@@ -2,18 +2,18 @@
 namespace GDO\Friends\Method;
 
 use GDO\DB\GDO;
-use GDO\Friends\Friendship;
+use GDO\Friends\GDO_Friendship;
 use GDO\Friends\Module_Friends;
 use GDO\Table\GDT_List;
 use GDO\Table\MethodQueryList;
-use GDO\User\User;
+use GDO\User\GDO_User;
 
 final class FriendList extends MethodQueryList
 {
 	/**
 	 * @return GDO
 	 */
-	public function gdoTable() { return Friendship::table(); }
+	public function gdoTable() { return GDO_Friendship::table(); }
 	
 	public function isGuestAllowed() { return Module_Friends::instance()->cfgGuestFriendships(); }
 	
@@ -25,7 +25,7 @@ final class FriendList extends MethodQueryList
 	
 	public function gdoQuery()
 	{
-		$user = User::current();
+		$user = GDO_User::current();
 		return $this->gdoTable()->select()->where("friend_user={$user->getID()}");
 	}
 	

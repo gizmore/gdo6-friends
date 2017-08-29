@@ -3,9 +3,9 @@ namespace GDO\Friends\Method;
 
 use GDO\Core\Method;
 use GDO\Core\Website;
-use GDO\Friends\FriendRequest;
+use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\Module_Friends;
-use GDO\User\User;
+use GDO\User\GDO_User;
 use GDO\Util\Common;
 
 final class AcceptFrom extends Method
@@ -14,9 +14,9 @@ final class AcceptFrom extends Method
 	
 	public function execute()
 	{
-		$user = User::current();
+		$user = GDO_User::current();
 		$fromId = Common::getRequestString('user');
-		if (!($request = FriendRequest::table()->getById($fromId, $user->getID())))
+		if (!($request = GDO_FriendRequest::table()->getById($fromId, $user->getID())))
 		{
 			return $this->error('err_friend_request');
 		}

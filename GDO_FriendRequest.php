@@ -6,9 +6,9 @@ use GDO\DB\GDT_CreatedAt;
 use GDO\Date\GDT_DateTime;
 use GDO\Template\GDT_Template;
 use GDO\User\GDT_User;
-use GDO\User\User;
+use GDO\User\GDO_User;
 
-final class FriendRequest extends GDO
+final class GDO_FriendRequest extends GDO
 {
 	public function gdoCached() { return false; }
 	public function gdoColumns()
@@ -32,7 +32,7 @@ final class FriendRequest extends GDO
 	
 	public function displayRelation() { return GDT_FriendRelation::displayRelation($this->getRelation()); }
 	
-	public function isFrom(User $user) { return $this->getUserID() === $user->getID(); }
+	public function isFrom(GDO_User $user) { return $this->getUserID() === $user->getID(); }
 	
 	/**
 	 * @return User
@@ -52,17 +52,17 @@ final class FriendRequest extends GDO
 	##############
 	### Static ###
 	##############
-	public static function getPendingFor(User $user, User $friend)
+	public static function getPendingFor(GDO_User $user, GDO_User $friend)
 	{
 		return self::getById($user->getID(), $friend->getID());
 	}
 	
-	public static function countIncomingFor(User $user)
+	public static function countIncomingFor(GDO_User $user)
 	{
-		if (null === ($cached = $user->tempGet('gwf_friendrequest_count')))
+		if (null === ($cached = $user->tempGet('gdo_friendrequest_count')))
 		{
 			$cached = self::table()->countWhere("frq_friend={$user->getID()} AND frq_denied IS NULL");
-			$user->tempSet('gwf_friendrequest_count', $cached);
+			$user->tempSet('gdo_friendrequest_count', $cached);
 			$user->recache();
 		}
 		return $cached;
@@ -70,7 +70,7 @@ final class FriendRequest extends GDO
 	public function gdoAfterCreate()
 	{
 		$user = $this->getFriend();
-		$user->tempUnset('gwf_friendrequest_count');
+		$user->tempUnset('gdo_friendrequest_count');
 		$user->recache();
 	}
 	

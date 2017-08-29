@@ -5,9 +5,9 @@ use GDO\DB\GDO;
 use GDO\DB\GDT_CreatedAt;
 use GDO\Template\GDT_Template;
 use GDO\User\GDT_User;
-use GDO\User\User;
+use GDO\User\GDO_User;
 
-final class Friendship extends GDO
+final class GDO_Friendship extends GDO
 {
 	public function gdoCached() { return false; }
 	public function gdoColumns()
@@ -43,29 +43,29 @@ final class Friendship extends GDO
 	##############
 	### Static ###
 	##############
-	public static function getRelationBetween(User $user, User $friend)
+	public static function getRelationBetween(GDO_User $user, GDO_User $friend)
 	{
 		return self::table()->select('friend_relation')->
 			where("friend_user={$user->getID()} AND friend_friend={$friend->getID()}")->exec()->fetchValue();
 	}
 	
-	public static function areRelated(User $user, User $friend)
+	public static function areRelated(GDO_User $user, GDO_User $friend)
 	{
 		return self::getRelationBetween($user, $friend) !== null;
 	}
 	
-	public static function count(User $user)
+	public static function count(GDO_User $user)
 	{
-		if (null === ($cached = $user->tempGet('gwf_friendship_count')))
+		if (null === ($cached = $user->tempGet('gdo_friendship_count')))
 		{
 			$cached = self::queryCount($user);
-			$user->tempSet('gwf_friendship_count', $cached);
+			$user->tempSet('gdo_friendship_count', $cached);
 			$user->recache();
 		}
 		return $cached;
 	}
 	
-	private static function queryCount(User $user)
+	private static function queryCount(GDO_User $user)
 	{
 		return self::table()->countWhere('friend_user='.$user->getID());
 	}
@@ -73,7 +73,7 @@ final class Friendship extends GDO
 	public function gdoAfterCreate()
 	{
 		$user = $this->getUser();
-		$user->tempUnset('gwf_friendship_count');
+		$user->tempUnset('gdo_friendship_count');
 		$user->recache();
 	}
 }

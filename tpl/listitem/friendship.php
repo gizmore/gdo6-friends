@@ -1,14 +1,14 @@
 <?php
-use GDO\Avatar\Avatar;
-use GDO\Friends\Friendship;
+use GDO\Avatar\GDO_Avatar;
+use GDO\Friends\GDO_Friendship;
 use GDO\UI\GDT_IconButton;
 
-$gdo instanceof Friendship;
+$gdo instanceof GDO_Friendship;
 $friendship = $gdo;
 $friend = $friendship->getFriend();
 ?>
 <md-list-item class="md-2-line">
-  <?= Avatar::renderAvatar($friend); ?>
+  <?= GDO_Avatar::renderAvatar($friend); ?>
   <div class="md-list-item-text" layout="column">
     <h3><?= $friend->displayName(); ?></h3>
     <p><?= t('friend_relation_since', [$friendship->displayRelation(), tt($friendship->getCreated())]); ?></p>

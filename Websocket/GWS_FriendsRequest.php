@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Friends\Websocket;
 
-use GDO\Friends\FriendRequest;
+use GDO\Friends\GDO_FriendRequest;
 use GDO\Websocket\Server\GWS_CommandForm;
 use GDO\Websocket\Server\GWS_Commands;
 use GDO\Websocket\Server\GWS_Global;
@@ -24,7 +24,7 @@ final class GWS_FriendsRequest extends GWS_CommandForm
      */
     public function hookFriendsRequest($requestId)
     {
-        $request = FriendRequest::findByGID($requestId);
+        $request = GDO_FriendRequest::findByGID($requestId);
         $friend = $request->getFriend();
         $payload = GWS_Message::payload(0x0601);
         $payload .= GWS_Message::wr32($request->getUserID());
