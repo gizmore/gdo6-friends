@@ -21,13 +21,13 @@ final class GDO_Friendship extends GDO
 	}
 	
 	/**
-	 * @return User
+	 * @return GDO_User
 	 */
 	public function getUser() { return $this->getValue('friend_user'); }
 	public function getUserID() { return $this->getVar('friend_user'); }
 	
 	/**
-	 * @return User
+	 * @return GDO_User
 	 */
 	public function getFriend() { return $this->getValue('friend_friend'); }
 	public function getFriendID() { return $this->getVar('friend_friend'); }

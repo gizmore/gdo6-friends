@@ -35,13 +35,13 @@ final class GDO_FriendRequest extends GDO
 	public function isFrom(GDO_User $user) { return $this->getUserID() === $user->getID(); }
 	
 	/**
-	 * @return User
+	 * @return GDO_User
 	 */
 	public function getUser() { return $this->getValue('frq_user'); }
 	public function getUserID() { return $this->getVar('frq_user'); }
 	
 	/**
-	 * @return User
+	 * @return GDO_User
 	 */
 	public function getFriend() { return $this->getValue('frq_friend'); }
 	public function getFriendID() { return $this->getVar('frq_friend'); }
