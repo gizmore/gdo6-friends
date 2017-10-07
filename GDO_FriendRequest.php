@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Friends;
 
-use GDO\DB\GDO;
+use GDO\Core\GDO;
 use GDO\DB\GDT_CreatedAt;
 use GDO\Date\GDT_DateTime;
 use GDO\Template\GDT_Template;

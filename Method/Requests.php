@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Friends\Method;
 
-use GDO\DB\GDO;
+use GDO\Core\GDO;
 use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\Module_Friends;
 use GDO\Table\GDT_List;
