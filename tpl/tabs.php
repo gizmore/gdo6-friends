@@ -1,7 +1,7 @@
 <?php
 use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\GDO_Friendship;
-use GDO\Template\GDT_Bar;
+use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 $user = GDO_User::current();

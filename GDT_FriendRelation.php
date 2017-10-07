@@ -2,7 +2,7 @@
 namespace GDO\Friends;
 
 use GDO\Core\GDOError;
-use GDO\Form\GDT_Enum;
+use GDO\DB\GDT_Enum;
 
 final class GDT_FriendRelation extends GDT_Enum
 {
@@ -13,7 +13,7 @@ final class GDT_FriendRelation extends GDT_Enum
 		'husband' => 'wife',
 	);
 	
-	public static function displayRelation(string $relation)
+	public static function displayRelation($relation)
 	{
 		return t('enum_'.$relation);
 	}

@@ -3,13 +3,13 @@ namespace GDO\Friends;
 use GDO\Core\Method;
 use GDO\User\GDO_User;
 use GDO\Util\Common;
-use GDO\Template\Response;
+use GDO\Core\GDT_Response;
 
 abstract class MethodFriendRequest extends Method
 {
 	/**
 	 * @param GDO_FriendRequest $request
-	 * @return Response
+	 * @return GDT_Response
 	 */
 	public abstract function executeWithRequest(GDO_FriendRequest $request);
 	

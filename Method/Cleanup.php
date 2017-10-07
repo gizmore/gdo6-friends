@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Friends\Method;
 
-use GDO\Cronjob\MethodCronjob;
+use GDO\Core\MethodCronjob;
 use GDO\DB\Database;
 use GDO\Date\Time;
 use GDO\Friends\GDO_FriendRequest;

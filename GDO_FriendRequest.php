@@ -4,7 +4,7 @@ namespace GDO\Friends;
 use GDO\Core\GDO;
 use GDO\DB\GDT_CreatedAt;
 use GDO\Date\GDT_DateTime;
-use GDO\Template\GDT_Template;
+use GDO\Core\GDT_Template;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 
