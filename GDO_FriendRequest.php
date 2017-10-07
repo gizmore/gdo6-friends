@@ -46,7 +46,7 @@ final class GDO_FriendRequest extends GDO
 	public function getFriend() { return $this->getValue('frq_friend'); }
 	public function getFriendID() { return $this->getVar('frq_friend'); }
 	
-	public function renderCard() { return GDT_Template::responsePHP('Friends', 'card/friendrequest.php', ['gdo' => $this]); }
+	public function renderCard() { return GDT_Template::php('Friends', 'card/friendrequest.php', ['gdo' => $this]); }
 	public function renderList() { return GDT_Template::php('Friends', 'listitem/friendrequest.php', ['gdo' => $this]); }
 	
 	##############

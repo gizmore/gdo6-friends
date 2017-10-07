@@ -38,7 +38,7 @@ final class GDO_Friendship extends GDO
 	public function displayRelation() { return GDT_FriendRelation::displayRelation($this->getRelation()); }
 	
 	public function renderList() { return GDT_Template::php('Friends', 'listitem/friendship.php', ['gdo' => $this]); }
-	public function renderCard() { return GDT_Template::responsePHP('Friends', 'card/friendship.php', ['gdo' => $this]); }
+	public function renderCard() { return GDT_Template::php('Friends', 'card/friendship.php', ['gdo' => $this]); }
 	
 	##############
 	### Static ###
