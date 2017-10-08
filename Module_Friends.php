@@ -55,7 +55,7 @@ final class Module_Friends extends GDO_Module
 	##############
 	public function renderTabs()
 	{
-		return $this->templatePHP('tabs.php');
+		return $this->responsePHP('tabs.php');
 	}
 
 	public function hookRightBar(GDT_Bar $navbar)

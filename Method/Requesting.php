@@ -10,7 +10,7 @@ use GDO\User\GDO_User;
 
 final class Requesting extends MethodQueryList
 {
-	public function isGuestAllowed() { return Module_Friends::instance()->cfgGuestGDO_Friendships(); }
+	public function isGuestAllowed() { return Module_Friends::instance()->cfgGuestFriendships(); }
 	
 	/**
 	 * @return GDO
@@ -19,8 +19,7 @@ final class Requesting extends MethodQueryList
 	
 	public function gdoDecorateList(GDT_List $list)
 	{
-		$list->label('list_pending_friend_requests', [sitename(), $list->countItems()]);
-// 		$list->itemTemplate(GDT_GDO_FriendshipItem::make());
+		$list->title('list_pending_friend_requests', [sitename(), $list->countItems()]);
 	}
 	
 	public function execute()
