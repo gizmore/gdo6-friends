@@ -26,7 +26,12 @@ final class Request extends MethodForm
 		$form->addFields(array(
 			GDT_User::make('frq_friend')->notNull(),
 		    GDT_Validator::make()->validator('frq_friend', [$this, 'validate_NoRelation']),
-			$gdo->gdoColumn('frq_relation'),
+		));
+		if (Module_Friends::instance()->cfgRelations())
+		{
+			$form->addField($gdo->gdoColumn('frq_relation'));
+		}
+		$form->addFields(array(
 			GDT_Submit::make(),
 			GDT_AntiCSRF::make(),
 		));
@@ -67,7 +72,13 @@ final class Request extends MethodForm
 	public function formValidated(GDT_Form $form)
 	{
 		$user = GDO_User::current();
-		$request = GDO_FriendRequest::blank($form->getFormData())->setVar('frq_user', $user->getID())->insert();
+		$data = $form->getFormData();
+		if (!Module_Friends::instance()->cfgRelations())
+		{
+			$data['friend_relation'] = 'friends';
+		}
+		
+		$request = GDO_FriendRequest::blank($data)->setVar('frq_user', $user->getID())->insert();
 		
 		$this->sendMail($request);
 		

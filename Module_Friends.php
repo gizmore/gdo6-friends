@@ -35,7 +35,6 @@ final class Module_Friends extends GDO_Module
 	public function getUserSettings()
 	{
 		return array(
-// 			GDT_Checkbox::make('friendship_autoconfirm')->initial('0'),
 			GDT_Checkbox::make('friendship_guests')->initial('0'),
 			GDT_Int::make('friendship_level')->unsigned()->initial('0'),
 		);
@@ -45,10 +44,12 @@ final class Module_Friends extends GDO_Module
 	{
 		return array(
 			GDT_Checkbox::make('friendship_guests')->initial('0'),
+			GDT_Checkbox::make('friendship_relations')->initial('1'),
 			GDT_Duration::make('friendship_cleanup_age')->initial(Time::ONE_DAY),
 		);
 	}
 	public function cfgGuestFriendships() { return $this->getConfigValue('friendship_guests'); }
+	public function cfgRelations() { return $this->getConfigValue('friendship_relations'); }
 	public function cfgCleanupAge() { return $this->getConfigValue('friendship_cleanup_age'); }
 	
 	##############

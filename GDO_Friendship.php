@@ -76,4 +76,18 @@ final class GDO_Friendship extends GDO
 		$user->tempUnset('gdo_friendship_count');
 		$user->recache();
 	}
+	
+	### Friends
+	public static function getFriendsQuery(GDO_User $user)
+	{
+		return GDO_Friendship::table()->select('*')->joinObject('friend_friend')->where("friend_user={$user->getID()}");
+	}
+	
+	public static function getFriends(GDO_User $user)
+	{
+		$query = self::getFriendsQuery($user);
+		$result = $query->exec();
+		$table = GDO_User::table();
+		return $table->fetchAll($result);
+	}
 }
