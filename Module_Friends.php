@@ -35,6 +35,7 @@ final class Module_Friends extends GDO_Module
 	public function getUserSettings()
 	{
 		return array(
+// 			GDT_Checkbox::make('friendship_autoconfirm')->initial('0'),
 			GDT_Checkbox::make('friendship_guests')->initial('0'),
 			GDT_Int::make('friendship_level')->unsigned()->initial('0'),
 		);
