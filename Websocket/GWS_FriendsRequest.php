@@ -6,6 +6,7 @@ use GDO\Websocket\Server\GWS_CommandForm;
 use GDO\Websocket\Server\GWS_Commands;
 use GDO\Websocket\Server\GWS_Global;
 use GDO\Websocket\Server\GWS_Message;
+use GDO\Friends\Method\Request;
 /**
  * WebSocket command for friend requests.
  * 
@@ -13,14 +14,14 @@ use GDO\Websocket\Server\GWS_Message;
  * 2. Hook friend requests and send websocket packet to notify friend target.
  * @author gizmore
  */
-final class GWS_FriendsRequest extends GWS_CommandForm
+class GWS_FriendsRequest extends GWS_CommandForm
 {
     # Map to form
-    public function getMethod() { return method('Friends', 'Request'); }
+    public function getMethod() { return Request::make(); }
     
     /**
      * Hook friend requests and notify target.
-     * @param unknown $requestId
+     * @param int $requestId
      */
     public function hookFriendsRequest($requestId)
     {

@@ -82,7 +82,6 @@ final class GDO_Friendship extends GDO
 	{
 		return GDO_Friendship::table()->select('*')->joinObject('friend_friend')->where("friend_user={$user->getID()}");
 	}
-	
 	public static function getFriends(GDO_User $user)
 	{
 		$query = self::getFriendsQuery($user);

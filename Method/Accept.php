@@ -5,6 +5,7 @@ use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\GDO_Friendship;
 use GDO\Friends\GDT_FriendRelation;
 use GDO\Friends\MethodFriendRequest;
+use GDO\Core\GDT_Hook;
 
 final class Accept extends MethodFriendRequest
 {
@@ -21,6 +22,7 @@ final class Accept extends MethodFriendRequest
 			'friend_friend' => $request->getUserID(),
 			'friend_relation' => GDT_FriendRelation::reverseRelation($request->getRelation()),
 		))->insert();
+		GDT_Hook::call('FriendsAccept', $request->getUserID(), $request->getFriendID());
 		return $this->message('msg_friends_accepted');
 	}
 }
