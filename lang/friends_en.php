@@ -12,6 +12,7 @@ return array(
 'err_already_pending_denied' => 'A request for %s has been denied or cancelled recently.',
 'err_already_pending' => 'There is already a pending request for %s.',
 'msg_friend_request_sent' => 'Your request has been sent.',
+'err_already_related' => 'You and Peter are already related.',
 ##################################################
 'list_friends' => 'Your friends (%s)',
 'friend_relation_since' => 'Is listed as your %s since %s',
