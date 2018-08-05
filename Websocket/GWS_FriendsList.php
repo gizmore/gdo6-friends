@@ -7,6 +7,7 @@ use GDO\Websocket\Server\GWS_Command;
 use GDO\User\GDO_User;
 use GDO\Friends\GDO_Friendship;
 use GDO\Table\GDT_PageMenu;
+use GDO\Friends\Module_Friends;
 /**
  * WebSocket command for friend requests.
  *
@@ -19,10 +20,11 @@ class GWS_FriendsList extends GWS_Command
     public function execute(GWS_Message $msg)
     {
         $user = GDO_User::findById($msg->read32u());
+        
         $page = $msg->read16u();
         $_REQUEST['f']['page'] = $page; # Hack
         
-        if ($msg->user() !== $user)
+        if (!Module_Friends::instance()->canViewFriends($user))
         {
             return $msg->replyErrorMessage($msg->cmd(), t("err_not_allowed"));
         }

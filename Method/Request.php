@@ -15,6 +15,7 @@ use GDO\UI\GDT_Link;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 use GDO\Form\GDT_Validator;
+use GDO\User\GDO_UserSetting;
 
 final class Request extends MethodForm
 {
@@ -26,6 +27,7 @@ final class Request extends MethodForm
 		$form->addFields(array(
 			GDT_User::make('frq_friend')->notNull(),
 		    GDT_Validator::make()->validator('frq_friend', [$this, 'validate_NoRelation']),
+		    GDT_Validator::make()->validator('frq_friend', [$this, 'validate_CanRequest']),
 		));
 		if (Module_Friends::instance()->cfgRelations())
 		{
@@ -67,6 +69,20 @@ final class Request extends MethodForm
 			}
 		}
 		return true;
+	}
+	
+	public function validate_canRequest(GDT_Form $form, GDT_User $field)
+	{
+	    if ($user = $field->getValue())
+	    {
+    	    if (!(Module_Friends::instance()->canRequest($user)))
+    	    {
+    	        $level = GDO_UserSetting::userGet($user, 'friendship_level')->initial;
+    	        $setting = GDO_UserSetting::userGet($user, 'friendship_who')->initial;
+    	        return $field->error('err_requesting_denied', [t('frq_setting_'.$setting), $level]);
+    	    }
+	    }
+	    return true;
 	}
 	
 	public function formValidated(GDT_Form $form)

@@ -60,7 +60,7 @@ final class GDO_Friendship extends GDO
 		{
 			$cached = self::queryCount($user);
 			$user->tempSet('gdo_friendship_count', $cached);
-			$user->recache();
+// 			$user->recache();
 		}
 		return $cached;
 	}
@@ -74,7 +74,7 @@ final class GDO_Friendship extends GDO
 	{
 		$user = $this->getUser();
 		$user->tempUnset('gdo_friendship_count');
-		$user->recache();
+// 		$user->recache();
 	}
 	
 	### Friends
