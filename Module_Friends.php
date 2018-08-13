@@ -90,7 +90,7 @@ final class Module_Friends extends GDO_Module
 	        case 'all': return true;
 	        case 'members': return $user->isMember();
 	        case 'none': return false;
-	        default: return false;
+	        default: die('ABCD'); return false;
 	    }
 	}
 	
