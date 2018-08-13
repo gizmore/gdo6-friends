@@ -47,27 +47,29 @@ final class Request extends MethodForm
 	
 	public function validate_NoRelation(GDT_Form $form, GDT_User $field)
 	{
-		$user = GDO_User::current();
-		$friend = $field->getUser();
-		if ($friend->getID() === $user->getID())
-		{
-			return $field->error('err_friend_self');
-		}
-		if (GDO_Friendship::areRelated($user, $friend))
-		{
-			return $field->error('err_already_related', [$friend->displayNameLabel()]);
-		}
-		if ($request = GDO_FriendRequest::getPendingFor($user, $friend))
-		{
-			if ($request->isDenied())
-			{
-				return $field->error('err_already_pending_denied', [$friend->displayNameLabel()]);
-			}
-			else
-			{
-				return $field->error('err_already_pending', [$friend->displayNameLabel()]);
-			}
-		}
+	    if ($friend = $field->getUser())
+	    {
+    		$user = GDO_User::current();
+    		if ($friend === $user)
+    		{
+    			return $field->error('err_friend_self');
+    		}
+    		if (GDO_Friendship::areRelated($user, $friend))
+    		{
+    			return $field->error('err_already_related', [$friend->displayNameLabel()]);
+    		}
+    		if ($request = GDO_FriendRequest::getPendingFor($user, $friend))
+    		{
+    			if ($request->isDenied())
+    			{
+    				return $field->error('err_already_pending_denied', [$friend->displayNameLabel()]);
+    			}
+    			else
+    			{
+    				return $field->error('err_already_pending', [$friend->displayNameLabel()]);
+    			}
+    		}
+	    }
 		return true;
 	}
 	
