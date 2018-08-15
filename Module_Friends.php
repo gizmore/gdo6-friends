@@ -26,10 +26,10 @@ final class Module_Friends extends GDO_Module
 	public function onLoadLanguage() { return $this->loadLanguage('lang/friends'); }
 	public function getClasses()
 	{
-	    return array(
-	        'GDO\Friends\GDO_Friendship',
-	        'GDO\Friends\GDO_FriendRequest',
-	    );
+		return array(
+			'GDO\Friends\GDO_Friendship',
+			'GDO\Friends\GDO_FriendRequest',
+		);
 	}
 
 	##############
@@ -38,8 +38,8 @@ final class Module_Friends extends GDO_Module
 	public function getUserSettings()
 	{
 		return array(
-		    GDT_Enum::make('friendship_who')->enumValues('all', 'members', 'none')->initial('all')->notNull(),
-		    GDT_Enum::make('friendship_visible')->enumValues('all', 'members', 'friends', 'none')->initial('none')->notNull(),
+			GDT_Enum::make('friendship_who')->enumValues('all', 'members', 'none')->initial('all')->notNull(),
+			GDT_Enum::make('friendship_visible')->enumValues('all', 'members', 'friends', 'none')->initial('none')->notNull(),
 			GDT_Int::make('friendship_level')->unsigned()->initial('0'),
 		);
 	}
@@ -74,44 +74,44 @@ final class Module_Friends extends GDO_Module
 	#####################
 	public function canRequest(GDO_User $to)
 	{
-	    $user = GDO_User::current();
-	    
-        # Check level
-	    $level = GDO_UserSetting::userGet($to, 'friendship_level');
-	    if ($level > $user->getLevel())
-	    {
-	        return false;
-	    }
-	    
-	    # Check user
-	    $setting = GDO_UserSetting::userGet($to, 'friendship_who')->initial;
-	    switch ($setting)
-	    {
-	        case 'all': return true;
-	        case 'members': return $user->isMember();
-	        case 'none': return false;
-	        default: die('ABCD'); return false;
-	    }
+		$user = GDO_User::current();
+		
+		# Check level
+		$level = GDO_UserSetting::userGet($to, 'friendship_level');
+		if ($level > $user->getLevel())
+		{
+			return false;
+		}
+		
+		# Check user
+		$setting = GDO_UserSetting::userGet($to, 'friendship_who')->initial;
+		switch ($setting)
+		{
+			case 'all': return true;
+			case 'members': return $user->isMember();
+			case 'none': return false;
+			default: die('ABCD'); return false;
+		}
 	}
 	
 	public function canViewFriends(GDO_User $from)
 	{
-	    # Self
-	    $user = GDO_User::current();
-	    if ($user === $from)
-	    {
-	        return true;
-	    }
-	    
-	    # Other
-	    $setting = GDO_UserSetting::userGet($from, 'friendship_visible')->initial;
-	    switch ($setting)
-	    {
-	        case 'all': return true;
-	        case 'members': return $user->isMember();
-	        case 'friends': return GDO_Friendship::areRelated($user, $from);
-	        case 'none': return false;
-	        default: return false;
-	    }
+		# Self
+		$user = GDO_User::current();
+		if ($user === $from)
+		{
+			return true;
+		}
+		
+		# Other
+		$setting = GDO_UserSetting::userGet($from, 'friendship_visible')->initial;
+		switch ($setting)
+		{
+			case 'all': return true;
+			case 'members': return $user->isMember();
+			case 'friends': return GDO_Friendship::areRelated($user, $from);
+			case 'none': return false;
+			default: return false;
+		}
 	}
 }

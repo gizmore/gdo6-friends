@@ -26,8 +26,8 @@ final class Request extends MethodForm
 		$gdo = GDO_FriendRequest::table();
 		$form->addFields(array(
 			GDT_User::make('frq_friend')->notNull(),
-		    GDT_Validator::make()->validator('frq_friend', [$this, 'validate_NoRelation']),
-		    GDT_Validator::make()->validator('frq_friend', [$this, 'validate_CanRequest']),
+			GDT_Validator::make()->validator('frq_friend', [$this, 'validate_NoRelation']),
+			GDT_Validator::make()->validator('frq_friend', [$this, 'validate_CanRequest']),
 		));
 		if (Module_Friends::instance()->cfgRelations())
 		{
@@ -47,44 +47,44 @@ final class Request extends MethodForm
 	
 	public function validate_NoRelation(GDT_Form $form, GDT_User $field)
 	{
-	    if ($friend = $field->getUser())
-	    {
-    		$user = GDO_User::current();
-    		if ($friend === $user)
-    		{
-    			return $field->error('err_friend_self');
-    		}
-    		if (GDO_Friendship::areRelated($user, $friend))
-    		{
-    			return $field->error('err_already_related', [$friend->displayNameLabel()]);
-    		}
-    		if ($request = GDO_FriendRequest::getPendingFor($user, $friend))
-    		{
-    			if ($request->isDenied())
-    			{
-    				return $field->error('err_already_pending_denied', [$friend->displayNameLabel()]);
-    			}
-    			else
-    			{
-    				return $field->error('err_already_pending', [$friend->displayNameLabel()]);
-    			}
-    		}
-	    }
+		if ($friend = $field->getUser())
+		{
+			$user = GDO_User::current();
+			if ($friend === $user)
+			{
+				return $field->error('err_friend_self');
+			}
+			if (GDO_Friendship::areRelated($user, $friend))
+			{
+				return $field->error('err_already_related', [$friend->displayNameLabel()]);
+			}
+			if ($request = GDO_FriendRequest::getPendingFor($user, $friend))
+			{
+				if ($request->isDenied())
+				{
+					return $field->error('err_already_pending_denied', [$friend->displayNameLabel()]);
+				}
+				else
+				{
+					return $field->error('err_already_pending', [$friend->displayNameLabel()]);
+				}
+			}
+		}
 		return true;
 	}
 	
 	public function validate_canRequest(GDT_Form $form, GDT_User $field)
 	{
-	    if ($user = $field->getValue())
-	    {
-    	    if (!(Module_Friends::instance()->canRequest($user)))
-    	    {
-    	        $level = GDO_UserSetting::userGet($user, 'friendship_level')->initial;
-    	        $setting = GDO_UserSetting::userGet($user, 'friendship_who')->initial;
-    	        return $field->error('err_requesting_denied', [t('frq_setting_'.$setting), $level]);
-    	    }
-	    }
-	    return true;
+		if ($user = $field->getValue())
+		{
+			if (!(Module_Friends::instance()->canRequest($user)))
+			{
+				$level = GDO_UserSetting::userGet($user, 'friendship_level')->initial;
+				$setting = GDO_UserSetting::userGet($user, 'friendship_who')->initial;
+				return $field->error('err_requesting_denied', [t('frq_setting_'.$setting), $level]);
+			}
+		}
+		return true;
 	}
 	
 	public function formValidated(GDT_Form $form)
