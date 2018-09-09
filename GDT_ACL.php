@@ -22,6 +22,13 @@ final class GDT_ACL extends GDT_Enum
 		$this->initial = 'acl_noone';
 	}
 	
+	/**
+	 * Check if a userpair allows access for this setting.
+	 * @param GDO_User $user
+	 * @param GDO_User $target
+	 * @throws GDOException
+	 * @return boolean
+	 */
 	public function hasAccess(GDO_User $user, GDO_User $target)
 	{
 		if ($user === $target) { return true; }
@@ -35,6 +42,13 @@ final class GDT_ACL extends GDT_Enum
 		}
 	}
 	
+	/**
+	 * Add where conditions to a query that reflect acl settings.
+	 * @param Query $query
+	 * @param GDO_User $user
+	 * @param string $creatorColumn
+	 * @return self
+	 */
 	public function aclQuery(Query $query, GDO_User $user, $creatorColumn)
 	{
 		# All

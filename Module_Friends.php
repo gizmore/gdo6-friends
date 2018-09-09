@@ -77,7 +77,7 @@ final class Module_Friends extends GDO_Module
 		$user = GDO_User::current();
 		
 		# Check level
-		$level = GDO_UserSetting::userGet($to, 'friendship_level');
+		$level = GDO_UserSetting::userGet($to, 'friendship_level')->initial;
 		if ($level > $user->getLevel())
 		{
 			return false;
