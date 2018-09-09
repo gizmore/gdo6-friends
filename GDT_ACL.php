@@ -32,7 +32,7 @@ final class GDT_ACL extends GDT_Enum
 	public function hasAccess(GDO_User $user, GDO_User $target)
 	{
 		if ($user === $target) { return true; }
-		switch ($this->initial)
+		switch ($this->var)
 		{
 			case 'acl_all'; return true;
 			case 'acl_members'; return $user->isMember();
@@ -61,17 +61,22 @@ final class GDT_ACL extends GDT_Enum
 			$condition .= " OR $idf = 'acl_members'";
 		}
 		
-		# Friends and own
+		# Friends and own require a owner column
 		if ($creatorColumn)
 		{
+			# Own
 			$uid = $user->getID();
 			$condition .= " OR $creatorColumn = {$uid}";
+
+			# Friends
 			if (module_enabled('Friends'))
 			{
 				$subquery = "SELECT 1 FROM gdo_friendship WHERE friend_user=$uid AND friend_friend=$creatorColumn";
 				$condition .= " OR ( $idf = 'acl_friends' AND ( $subquery ) )";
 			}
 		}
+		
+		# Apply condition
 		$query->where($condition);
 		return $this;
 	}
