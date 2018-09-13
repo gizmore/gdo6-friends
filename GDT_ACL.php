@@ -20,6 +20,7 @@ final class GDT_ACL extends GDT_Enum
 	{
 		$this->enumValues = ['acl_all', 'acl_members', 'acl_friends', 'acl_noone'];
 		$this->initial = 'acl_noone';
+		$this->notNull = true;
 	}
 	
 	/**
