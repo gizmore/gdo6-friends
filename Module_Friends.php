@@ -102,7 +102,7 @@ final class Module_Friends extends GDO_Module
 		{
 			return true;
 		}
-		
+
 		# Other
 		$setting = GDO_UserSetting::userGet($from, 'friendship_visible')->initial;
 		switch ($setting)
