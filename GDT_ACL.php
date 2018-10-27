@@ -16,6 +16,8 @@ use GDO\DB\Query;
  */
 final class GDT_ACL extends GDT_Enum
 {
+	public function defaultLabel() { return $this->label('visibility'); }
+	
 	public function __construct()
 	{
 		$this->enumValues = ['acl_all', 'acl_members', 'acl_friends', 'acl_noone'];

@@ -1,6 +1,12 @@
 <?php
 return array(
 ##################################################
+'enum_acl_all' => 'All',
+'enum_acl_members' => 'Members',
+'enum_acl_friends' => 'Friends',
+'enum_acl_noone' => 'Noone',
+'visibility' => 'Visibility',
+##################################################
 'link_friends' => 'Friends (%s)',
 'link_add_friend' => 'Add a friend',
 'link_incoming_friend_requests' => 'Incoming requests (%s)',
