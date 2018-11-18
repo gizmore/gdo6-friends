@@ -41,7 +41,7 @@ final class GDT_ACL extends GDT_Enum
 			case 'acl_members'; return $user->isMember();
 			case 'acl_friends'; return module_enabled('Friends') ? GDO_Friendship::areRelated($user, $target) : false;
 			case 'acl_noone'; return false;
-			default: throw new GDOException('ACL enum value is invalid: '.$this->initial);
+			default: throw new GDOException('ACL enum value is invalid: '.$this->var);
 		}
 	}
 	
