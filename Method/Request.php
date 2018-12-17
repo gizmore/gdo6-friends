@@ -100,7 +100,7 @@ final class Request extends MethodForm
 		
 		$this->sendMail($request);
 		
-		GDT_Hook::call('FriendsRequest', $request);
+		GDT_Hook::callWithIPC('FriendsRequest', $request);
 		
 		return $this->message('msg_friend_request_sent');
 	}

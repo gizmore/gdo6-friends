@@ -22,7 +22,7 @@ final class Accept extends MethodFriendRequest
 			'friend_friend' => $request->getUserID(),
 			'friend_relation' => GDT_FriendRelation::reverseRelation($request->getRelation()),
 		))->insert();
-		GDT_Hook::call('FriendsAccept', $request->getUserID(), $request->getFriendID());
+		GDT_Hook::callWithIPC('FriendsAccept', $request->getUserID(), $request->getFriendID());
 		return $this->message('msg_friends_accepted');
 	}
 }
