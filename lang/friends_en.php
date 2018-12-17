@@ -7,6 +7,12 @@ return array(
 'enum_acl_noone' => 'Noone',
 'visibility' => 'Visibility',
 ##################################################
+'err_only_member_access' => 'Only Members are allowed to access this.',
+'err_only_friend_access' => 'Only their friends are allowed to access this.',
+'err_only_private_access' => 'Only the user theyself is allowed to access this.',
+'err_unknown_acl_setting' => 'Unknown ACL Setting: %s.',
+	
+##################################################
 'link_friends' => 'Friends (%s)',
 'link_add_friend' => 'Add a friend',
 'link_incoming_friend_requests' => 'Incoming requests (%s)',

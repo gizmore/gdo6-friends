@@ -38,8 +38,8 @@ final class Module_Friends extends GDO_Module
 	public function getUserSettings()
 	{
 		return array(
-			GDT_Enum::make('friendship_who')->enumValues('all', 'members', 'none')->initial('all')->notNull(),
-			GDT_Enum::make('friendship_visible')->enumValues('all', 'members', 'friends', 'none')->initial('none')->notNull(),
+			GDT_ACL::make('friendship_who')->initial('acl_all'),
+			GDT_ACL::make('friendship_visible')->initial('acl_noone'),
 			GDT_Int::make('friendship_level')->unsigned()->initial('0'),
 		);
 	}
@@ -72,7 +72,7 @@ final class Module_Friends extends GDO_Module
 	#####################
 	### Setting Perms ###
 	#####################
-	public function canRequest(GDO_User $to)
+	public function canRequest(GDO_User $to, &$reason)
 	{
 		$user = GDO_User::current();
 		
@@ -80,21 +80,19 @@ final class Module_Friends extends GDO_Module
 		$level = GDO_UserSetting::userGet($to, 'friendship_level')->initial;
 		if ($level > $user->getLevel())
 		{
+			$reason = t('err_level_required', [$level]);
 			return false;
 		}
 		
 		# Check user
-		$setting = GDO_UserSetting::userGet($to, 'friendship_who')->initial;
-		switch ($setting)
-		{
-			case 'all': return true;
-			case 'members': return $user->isMember();
-			case 'none': return false;
-			default: die('ABCD'); return false;
-		}
+		/**
+		 * @var \GDO\Friends\GDT_ACL $setting
+		 */
+		$setting = GDO_UserSetting::userGet($to, 'friendship_who');
+		return $setting->hasAccess($user, $to, $reason);
 	}
 	
-	public function canViewFriends(GDO_User $from)
+	public function canViewFriends(GDO_User $from, &$reason)
 	{
 		# Self
 		$user = GDO_User::current();
@@ -104,14 +102,10 @@ final class Module_Friends extends GDO_Module
 		}
 
 		# Other
-		$setting = GDO_UserSetting::userGet($from, 'friendship_visible')->initial;
-		switch ($setting)
-		{
-			case 'all': return true;
-			case 'members': return $user->isMember();
-			case 'friends': return GDO_Friendship::areRelated($user, $from);
-			case 'none': return false;
-			default: return false;
-		}
+		/**
+		 * @var \GDO\Friends\GDT_ACL $setting
+		 */
+		$setting = GDO_UserSetting::userGet($from, 'friendship_visible');
+		return $setting->hasAccess($user, $from, $reason);
 	}
 }

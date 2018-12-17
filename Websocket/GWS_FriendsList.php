@@ -24,9 +24,10 @@ class GWS_FriendsList extends GWS_Command
 		$page = $msg->read16u();
 		$_REQUEST['f']['page'] = $page; # Hack
 		
-		if (!Module_Friends::instance()->canViewFriends($user))
+		$reason = '';
+		if (!Module_Friends::instance()->canViewFriends($user, $reason))
 		{
-			return $msg->replyErrorMessage($msg->cmd(), t("err_not_allowed"));
+			return $msg->replyErrorMessage($msg->cmd(), t("err_not_allowed", [$reason]));
 		}
 
 		$query = GDO_Friendship::table()->select('user_id')->joinObject('friend_friend')->where('friend_user='.$user->getID());
