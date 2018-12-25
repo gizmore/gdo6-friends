@@ -23,6 +23,7 @@ return array(
 'err_friend_self' => 'You cannot befriend yourself here.',
 'err_already_pending_denied' => 'A request for %s has been denied or cancelled recently.',
 'err_already_pending' => 'There is already a pending request for %s.',
+'err_requesting_denied' => 'You cannot request a friendship with this user: %s.',
 'msg_friend_request_sent' => 'Your request has been sent.',
 'err_already_related' => 'You and Peter are already related.',
 ##################################################

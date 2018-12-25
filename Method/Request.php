@@ -77,11 +77,12 @@ final class Request extends MethodForm
 	{
 		if ($user = $field->getValue())
 		{
-			if (!(Module_Friends::instance()->canRequest($user)))
+			$reason = '';
+			if (!(Module_Friends::instance()->canRequest($user, $reason)))
 			{
-				$level = GDO_UserSetting::userGet($user, 'friendship_level')->initial;
-				$setting = GDO_UserSetting::userGet($user, 'friendship_who')->initial;
-				return $field->error('err_requesting_denied', [t('frq_setting_'.$setting), $level]);
+				$level = GDO_UserSetting::userGet($user, 'friendship_level')->var;
+				$setting = GDO_UserSetting::userGet($user, 'friendship_who')->var;
+				return $field->error('err_requesting_denied', [$reason]);
 			}
 		}
 		return true;
