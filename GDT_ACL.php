@@ -5,6 +5,7 @@ use GDO\DB\GDT_Enum;
 use GDO\User\GDO_User;
 use GDO\Core\GDOException;
 use GDO\DB\Query;
+use GDO\Core\Logger;
 
 /**
  * An ACL field has default ACL options.
@@ -35,6 +36,7 @@ final class GDT_ACL extends GDT_Enum
 	 */
 	public function hasAccess(GDO_User $user, GDO_User $target, &$reason, $throwException=true)
 	{
+// 		Logger::logDebug("ACL has access {$user->displayName()} to {$target->displayName()} via #{$this->var}");
 		# Self is fine
 		if ($user === $target) { return true; }
 		

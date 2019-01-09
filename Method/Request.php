@@ -15,7 +15,6 @@ use GDO\UI\GDT_Link;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 use GDO\Form\GDT_Validator;
-use GDO\User\GDO_UserSetting;
 
 final class Request extends MethodForm
 {
@@ -80,8 +79,6 @@ final class Request extends MethodForm
 			$reason = '';
 			if (!(Module_Friends::instance()->canRequest($user, $reason)))
 			{
-				$level = GDO_UserSetting::userGet($user, 'friendship_level')->var;
-				$setting = GDO_UserSetting::userGet($user, 'friendship_who')->var;
 				return $field->error('err_requesting_denied', [$reason]);
 			}
 		}
