@@ -1,5 +1,6 @@
 <?php
 return array(
+'gdo_friendrequest' => 'Friendrequest',
 ##################################################
 'enum_acl_all' => 'All',
 'enum_acl_members' => 'Members',
