@@ -16,6 +16,11 @@ use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 use GDO\Form\GDT_Validator;
 
+/**
+ * Send a friend request.
+ * @author gizmore
+ * @version 6.09
+ */
 final class Request extends MethodForm
 {
 	public function isGuestAllowed() { return Module_Friends::instance()->cfgGuestFriendships(); }
