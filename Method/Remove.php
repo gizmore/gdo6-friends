@@ -20,14 +20,14 @@ final class Remove extends Method
 		$user = GDO_User::current();
 		$friendId = Common::getRequestString('friend');
 		
-		# Call hook before friendship is removed.
-		GDT_Hook::callWithIPC('FriendsRemove', $user->getID(), $friendId);
-		
 		# Delete Friendship
 		$friendship = GDO_Friendship::findById($friendId, $user->getID());
 		$friendship->delete();
 		$friendship = GDO_Friendship::findById($user->getID(), $friendId);
 		$friendship->delete();
+		
+		# Call hook
+		GDT_Hook::callWithIPC('FriendsRemove', $user->getID(), $friendId);
 		
 		# Send mail notes
 		$this->sendMail($friendship);
