@@ -8,6 +8,8 @@ use GDO\Friends\Module_Friends;
 use GDO\Mail\Mail;
 use GDO\User\GDO_User;
 use GDO\Util\Common;
+use GDO\Core\GDT_Hook;
+use GDO\Core\Application;
 
 final class Remove extends Method
 {
@@ -16,18 +18,31 @@ final class Remove extends Method
 	public function execute()
 	{
 		$user = GDO_User::current();
+		$friendId = Common::getRequestString('friend');
 		
-		$friendship = GDO_Friendship::findById(Common::getRequestString('friend'), $user->getID());
+		# Call hook before friendship is removed.
+		GDT_Hook::callWithIPC('FriendsRemove', $user->getID(), $friendId);
+		
+		# Delete Friendship
+		$friendship = GDO_Friendship::findById($friendId, $user->getID());
 		$friendship->delete();
-		$friendship = GDO_Friendship::findById($user->getID(), Common::getRequestString('friend'));
+		$friendship = GDO_Friendship::findById($user->getID(), $friendId);
 		$friendship->delete();
+		
+		# Send mail notes
 		$this->sendMail($friendship);
 		
+		# Render and redirect
 		$tabs = Module_Friends::instance()->renderTabs();
 		$response = $this->message('msg_friendship_deleted', [$friendship->getFriend()->displayNameLabel()]);
-		$redirect = Website::redirect(href('Friends', 'List'));
+		$tabs->add($response);
 		
-		return $tabs->add($response)->add($redirect);
+		if (Application::instance()->isHTML())
+		{
+			$redirect = Website::redirect(href('Friends', 'List'));
+			$tabs->add($redirect);
+		}
+		return $tabs;
 	}
 	
 	private function sendMail(GDO_Friendship $friendship)
