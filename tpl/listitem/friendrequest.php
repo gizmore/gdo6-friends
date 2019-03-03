@@ -19,7 +19,9 @@ if ($friendship->isFrom($user)) :
   </div>
   <?= GDT_IconButton::make()->icon('delete')->href(href('Friends', 'RemoveTo', '&friend='.$friend->getID()))->render(); ?>
 </md-list-item>
-<?php else : ?>
+<?php else :
+$friend = $friendship->getUser();
+?>
 <md-list-item class="md-2-line">
   <?= GDT_ProfileLink::make()->forUser($friend)->render(); ?>
   <div class="md-list-item-text" layout="column">

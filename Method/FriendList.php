@@ -19,7 +19,7 @@ final class FriendList extends MethodQueryList
 	
 	public function gdoDecorateList(GDT_List $list)
 	{
-		$list->title('list_friends', [$list->countItems()]);
+		$list->title(t('list_friends', [$list->countItems()]));
 	}
 	
 	public function gdoQuery()

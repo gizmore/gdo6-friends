@@ -19,7 +19,7 @@ final class Requesting extends MethodQueryList
 	
 	public function gdoDecorateList(GDT_List $list)
 	{
-		$list->title('list_pending_friend_requests', [sitename(), $list->countItems()]);
+		$list->title(t('list_pending_friend_requests', [sitename(), $list->countItems()]));
 	}
 	
 	public function execute()

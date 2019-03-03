@@ -12,7 +12,7 @@ if ($user->isAuthenticated())
 	$link = GDT_Link::make('link_friends')->label('link_friends', [$count])->href(href('Friends', 'FriendList'));
 	if (GDO_FriendRequest::countIncomingFor($user))
 	{
-		$link->icon('notifications');
+		$link->icon('alert');
 	}
 	$navbar->addField($link);
 }

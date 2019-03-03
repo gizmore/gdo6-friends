@@ -1,5 +1,12 @@
 <?php
 return array(
+'cfg_friendship_who' => 'Who may send you friend requests?',
+'cfg_friendship_visible' => 'Who may see your friends?',
+'cfg_friendship_level' => 'What is your friend\'s minimum level?',
+'cfg_friendship_guests' => 'Allow relations between guests?',
+'cfg_friendship_relations' => 'Use extend relation states?',
+'cfg_friendship_cleanup_age' => 'Clear deleted requests after N',
+##################################################
 'gdo_friendrequest' => 'Friendrequest',
 ##################################################
 'enum_acl_all' => 'All',
@@ -34,7 +41,7 @@ return array(
 'msg_friends_accepted' => 'Your relationship status with %s has been accepted.',
 'msg_friendship_deleted' => 'Your relationship status with %s has been deleted.',
 ##################################################
-'list_friends_requests' => '[%s] Friend Requets (%s)',
+'list_friends_requests' => '[%s] Friend Requests (%s)',
 'friend_request_from' => 'Request as %s from %s',
 ##################################################
 'list_pending_friend_requests' => '[%s] Pending requests from you (%s)',
