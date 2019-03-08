@@ -39,7 +39,7 @@ final class Remove extends Method
 		
 		if (Application::instance()->isHTML())
 		{
-			$redirect = Website::redirect(href('Friends', 'List'));
+			$redirect = Website::redirect(href('Friends', 'FriendList'));
 			$tabs->add($redirect);
 		}
 		return $tabs;
