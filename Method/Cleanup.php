@@ -1,11 +1,11 @@
 <?php
 namespace GDO\Friends\Method;
 
-use GDO\Core\MethodCronjob;
 use GDO\DB\Database;
 use GDO\Date\Time;
 use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\Module_Friends;
+use GDO\Cronjob\MethodCronjob;
 
 final class Cleanup extends MethodCronjob
 {
