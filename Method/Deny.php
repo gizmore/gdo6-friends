@@ -8,6 +8,7 @@ use GDO\Friends\MethodFriendRequest;
 use GDO\Friends\Module_Friends;
 use GDO\Mail\Mail;
 use GDO\User\GDO_User;
+use GDO\Core\GDT_Template;
 
 final class Deny extends MethodFriendRequest
 {
@@ -32,8 +33,15 @@ final class Deny extends MethodFriendRequest
 		$friend = $request->getFriend();
 		
 		$mail = Mail::botMail();
-		$mail->setSubject(tusr($user, 'mail_subj_frq_denied', [$sitename, $username]));
-		$args = [$friend->displayNameLabel(), $username, $sitename];
-		$mail->setBody(tusr($friend, 'mail_body_frq_denied', $args));
+		$mail->setSubject(tusr($friend, 'mail_subj_frq_denied', [$sitename, $username]));
+		
+		$tVars = array(
+			'user' => $user,
+			'friend' => $friend,
+		);
+		$body = GDT_Template::phpUser($friend, 'Recovery', 'mail/friend_denied.php', $tVars);
+		$mail->setBody($body);
+		
+		$mail->sendToUser($friend);
 	}
 }

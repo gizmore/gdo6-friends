@@ -10,6 +10,7 @@ use GDO\User\GDO_User;
 use GDO\Util\Common;
 use GDO\Core\GDT_Hook;
 use GDO\Core\Application;
+use GDO\Core\GDT_Template;
 
 final class Remove extends Method
 {
@@ -49,11 +50,17 @@ final class Remove extends Method
 	{
 		$user = GDO_User::current();
 		$friend = $friendship->getFriend();
-		$sitename = sitename();
+
 		$mail = Mail::botMail();
-		$mail->setSubject(tusr($friend, 'mail_subj_friend_removed', [$sitename, $user->displayNameLabel()]));
-		$args = [$friend->displayNameLabel(), $user->displayNameLabel(), $sitename];
-		$mail->setBody(tusr($friend, 'mail_body_friend_removed', $args));
+		$mail->setSubject(tusr($friend, 'mail_subj_friend_removed', [sitename(), $user->displayNameLabel()]));
+		
+		$tVars = array(
+			'user' => $user,
+			'friend' => $friend,
+		);
+		$body = GDT_Template::phpUser($friend, 'Friends', 'mail/friend_removed.php', $tVars);
+		$mail->setBody($body);
+		
 		$mail->sendToUser($friend);
 	}
 }

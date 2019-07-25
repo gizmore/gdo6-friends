@@ -21,7 +21,7 @@ final class AcceptFrom extends Method
 			return $this->error('err_friend_request');
 		}
 		
-		method('Friends', 'Accept')->executeWithRequest($request);
+		Accept::make()->executeWithRequest($request);
 		
 		$tabs = Module_Friends::instance()->renderTabs();
 		$response = $this->message('msg_friends_accepted');
