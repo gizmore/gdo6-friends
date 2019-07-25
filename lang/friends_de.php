@@ -53,23 +53,6 @@ return array(
 'enum_bestfriend' => 'Beste Freunde',
 ##################################################
 'mail_subj_friend_request' => '[%s] Beziehung mit %s',
-'mail_body_friend_request' => '
-Liebe(r) %s,
-
-%s hat angefragt Sie als Ihr %s auf %s hinzuzufügen.
-
-Sie können dies Annehmen, indem Sie diesen Link aufrufen.
-
-%s
-
-Sie können dies auch ablehnen.
-
-%s
-
-Es ist ebenfalls möglich diese Anfrage zu ignorieren.
-
-Viele Grüße,
-Das %4$s Team',
 ##################################################
 'mail_subj_frq_denied' => '[%s] %s hat Ihre Anfrage abgelehnt',
 'mail_body_frq_denied' =>  '

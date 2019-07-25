@@ -15,6 +15,7 @@ use GDO\UI\GDT_Link;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 use GDO\Form\GDT_Validator;
+use GDO\Core\GDT_Template;
 
 /**
  * Send a friend request.
@@ -114,17 +115,25 @@ final class Request extends MethodForm
 		$mail->setSender(GWF_BOT_EMAIL);
 		$mail->setSenderName(GWF_BOT_NAME);
 		
+
 		$friend = $request->getFriend();
 		$user = $request->getUser();
 		$relation = GDT_FriendRelation::displayRelation($request->getRelation());
-		$sitename = sitename();
 		$append = "&from={$user->getID()}&for={$friend->getID()}&token={$request->gdoHashcode()}";
 		$linkAccept = GDT_Link::anchor(url('Friends', 'Accept', $append));
 		$linkDeny = GDT_Link::anchor(url('Friends', 'Deny', $append));
 		
-		$mail->setSubject(tusr($friend, 'mail_subj_friend_request', [$sitename, $user->displayNameLabel()]));
-		$args = [$friend->displayNameLabel(), $user->displayNameLabel(), $relation, $sitename, $linkAccept, $linkDeny];
-		$mail->setBody(tusr($friend, 'mail_body_friend_request', $args));
+		$tVars = array(
+			'user' => $user,
+			'friend' => $friend,
+			'relation' => $relation,
+			'link_accept' => $linkAccept,
+			'link_deny' => $linkDeny,
+		);
+		$body = GDT_Template::phpUser($friend, 'Friends', 'mail/friend_request.php', $tVars);
+
+		$mail->setSubject(tusr($friend, 'mail_subj_friend_request', [sitename(), $user->displayNameLabel()]));
+		$mail->setBody($body);
 		
 		$mail->sendToUser($friend);
 	}
