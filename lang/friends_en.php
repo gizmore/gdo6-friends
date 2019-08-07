@@ -26,7 +26,7 @@ return array(
 'link_incoming_friend_requests' => 'Incoming requests (%s)',
 'link_pending_friend_requests' => 'Sent requests',
 ##################################################
-'ft_friends_request' => '[%s] Add a friend',
+'ft_friends_request' => 'Add a friend',
 'frq_friend' => 'Name of your friend',
 'err_friend_self' => 'You cannot befriend yourself here.',
 'err_already_pending_denied' => 'A request for %s has been denied or cancelled recently.',
@@ -41,10 +41,10 @@ return array(
 'msg_friends_accepted' => 'Your relationship status with %s has been accepted.',
 'msg_friendship_deleted' => 'Your relationship status with %s has been deleted.',
 ##################################################
-'list_friends_requests' => '[%s] Friend Requests (%s)',
+'list_friends_requests' => 'Friend Requests (%s)',
 'friend_request_from' => 'Request as %s from %s',
 ##################################################
-'list_pending_friend_requests' => '[%s] Pending requests from you (%s)',
+'list_pending_friend_requests' => 'Pending requests from you (%s)',
 'friend_request_to' => 'Requested to be %s at %s',
 'msg_request_revoked' => 'You have revoked your friend request. You cannot re-request until a cleanup.',
 ##################################################

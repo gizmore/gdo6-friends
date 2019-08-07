@@ -26,7 +26,7 @@ return array(
 'link_incoming_friend_requests' => 'Eingehende Anfragen(%s)',
 'link_pending_friend_requests' => 'Gesendete Anfragen',
 ##################################################
-'ft_friends_request' => '[%s] Freund(in) hinzufügen',
+'ft_friends_request' => 'Freund(in) hinzufügen',
 'frq_friend' => 'Name des Nutzers',
 'err_friend_self' => 'Sie können Sich nicht selbst befreunden.',
 'err_already_pending_denied' => 'Eine Anfrage an %s wurde erst kürzlich abgelehnt.',
@@ -41,10 +41,10 @@ return array(
 'msg_friends_accepted' => 'Ihr Freundschaftsstatus mit %s wurde akzeptiert.',
 'msg_friendship_deleted' => 'Ihr Freundschaftsstatus mit %s wurde gelöscht.',
 ##################################################
-'list_friends_requests' => '[%s] Freundschaftsanfragen(%s)',
+'list_friends_requests' => 'Freundschaftsanfragen(%s)',
 'friend_request_from' => 'Anfrage als %s von %s',
 ##################################################
-'list_pending_friend_requests' => '[%s] Ihre offenen Freundschafsanfragen (%s)',
+'list_pending_friend_requests' => 'Ihre offenen Freundschafsanfragen (%s)',
 'friend_request_to' => 'Requested to be %s at %s',
 'msg_request_revoked' => 'Sie haben Ihre Anfrage zurückgezogen.',
 ##################################################

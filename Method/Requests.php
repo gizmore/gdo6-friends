@@ -19,7 +19,7 @@ final class Requests extends MethodQueryList
 	
 	public function gdoDecorateList(GDT_List $list)
 	{
-		$list->title(t('list_friends_requests', [sitename(), $list->countItems()]));
+		$list->title(t('list_friends_requests', [$list->countItems()]));
 	}
 	
 	public function gdoQuery()
