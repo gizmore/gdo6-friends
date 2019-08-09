@@ -19,7 +19,6 @@ return array(
 'err_only_friend_access' => 'Nur seine/ihre Freunde dürfen darauf zugreifen.',
 'err_only_private_access' => 'Nur der/die Nutzerin selbst darf darauf zugreifen.',
 'err_unknown_acl_setting' => 'Unbekannte ACL Einstellung: %s.',
-	
 ##################################################
 'link_friends' => 'Freunde (%s)',
 'link_add_friend' => 'Freund(in) hinzufügen',
@@ -51,6 +50,9 @@ return array(
 'friend_relation' => 'Beziehung',
 'enum_friend' => 'Freund',
 'enum_bestfriend' => 'Beste Freunde',
+'enum_coworker' => 'Arbeitskollegen',
+'enum_husband' => 'Ehemann',
+'enum_wife' => 'Ehefrau',
 ##################################################
 'mail_subj_friend_request' => '[%s] Beziehung mit %s',
 'mail_subj_frq_denied' => '[%s] %s hat Ihre Anfrage abgelehnt',
