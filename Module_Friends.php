@@ -7,9 +7,9 @@ use GDO\Date\Time;
 use GDO\UI\GDT_Bar;
 use GDO\DB\GDT_Checkbox;
 use GDO\DB\GDT_Int;
-use GDO\DB\GDT_Enum;
 use GDO\User\GDO_User;
 use GDO\User\GDO_UserSetting;
+
 /**
  * GDO_Friendship and user relation module
  * 

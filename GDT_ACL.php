@@ -5,7 +5,6 @@ use GDO\DB\GDT_Enum;
 use GDO\User\GDO_User;
 use GDO\Core\GDOException;
 use GDO\DB\Query;
-use GDO\Core\Logger;
 
 /**
  * An ACL field has default ACL options.
