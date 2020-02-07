@@ -47,11 +47,13 @@ final class Module_Friends extends GDO_Module
 	public function getConfig()
 	{
 		return array(
+			GDT_Checkbox::make('friendship_friendslink')->initial('0'),
 			GDT_Checkbox::make('friendship_guests')->initial('0'),
 			GDT_Checkbox::make('friendship_relations')->initial('1'),
 			GDT_Duration::make('friendship_cleanup_age')->initial(Time::ONE_DAY),
 		);
 	}
+	public function cfgFriendsLink() { return $this->getConfigValue('friendship_friendslink'); }
 	public function cfgGuestFriendships() { return $this->getConfigValue('friendship_guests'); }
 	public function cfgRelations() { return $this->getConfigValue('friendship_relations'); }
 	public function cfgCleanupAge() { return $this->getConfigValue('friendship_cleanup_age'); }
@@ -66,7 +68,10 @@ final class Module_Friends extends GDO_Module
 
 	public function hookRightBar(GDT_Bar $navbar)
 	{
-		$this->templatePHP('rightbar.php', ['navbar' => $navbar]);
+		if ($this->cfgFriendsLink())
+		{
+			$this->templatePHP('rightbar.php', ['navbar' => $navbar]);
+		}
 	}
 	
 	#####################
