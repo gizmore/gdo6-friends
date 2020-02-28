@@ -7,11 +7,19 @@ use GDO\Date\Time;
 use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\Module_Friends;
 use GDO\User\GDO_User;
+use GDO\User\GDT_User;
 use GDO\Util\Common;
 
 final class RemoveTo extends Method
 {
 	public function isAlwaysTransactional() { return true; }
+	
+	public function gdoParameters()
+	{
+		return array(
+			GDT_User::make('user')->notNull(),
+		);
+	}
 	
 	public function execute()
 	{

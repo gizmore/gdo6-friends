@@ -11,10 +11,18 @@ use GDO\Util\Common;
 use GDO\Core\GDT_Hook;
 use GDO\Core\Application;
 use GDO\Core\GDT_Template;
+use GDO\Profile\GDT_User;
 
 final class Remove extends Method
 {
 	public function isAlwaysTransactional() { return true; }
+	
+	public function gdoParameters()
+	{
+		return array(
+			GDT_User::make('friend')->notNull(),
+		);
+	}
 	
 	public function execute()
 	{

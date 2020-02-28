@@ -7,10 +7,18 @@ use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\Module_Friends;
 use GDO\User\GDO_User;
 use GDO\Util\Common;
+use GDO\Profile\GDT_User;
 
 final class RemoveFrom extends Method
 {
 	public function isAlwaysTransactional() { return true; }
+	
+	public function gdoParameters()
+	{
+		return array(
+			GDT_User::make('user')->notNull(),
+		);
+	}
 	
 	public function execute()
 	{
