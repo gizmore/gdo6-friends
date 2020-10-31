@@ -50,7 +50,7 @@ final class Module_Friends extends GDO_Module
 			GDT_Checkbox::make('friendship_friendslink')->initial('0'),
 			GDT_Checkbox::make('friendship_guests')->initial('0'),
 			GDT_Checkbox::make('friendship_relations')->initial('1'),
-			GDT_Duration::make('friendship_cleanup_age')->initial(Time::ONE_DAY),
+			GDT_Duration::make('friendship_cleanup_age')->initial('1d'),
 		);
 	}
 	public function cfgFriendsLink() { return $this->getConfigValue('friendship_friendslink'); }
