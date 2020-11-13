@@ -3,10 +3,11 @@ namespace GDO\Friends;
 
 use GDO\Core\GDO_Module;
 use GDO\Date\GDT_Duration;
-use GDO\UI\GDT_Bar;
+use GDO\UI\GDT_Link;
 use GDO\DB\GDT_Checkbox;
 use GDO\DB\GDT_Int;
 use GDO\User\GDO_User;
+use GDO\UI\GDT_Page;
 
 /**
  * GDO_Friendship and user relation module
@@ -64,11 +65,21 @@ final class Module_Friends extends GDO_Module
 		return $this->responsePHP('tabs.php');
 	}
 
-	public function hookRightBar(GDT_Bar $navbar)
+	public function onInitSidebar()
 	{
-		if ($this->cfgFriendsLink())
+// 		if ($this->cfgFriendsLink())
 		{
-			$this->templatePHP('rightbar.php', ['navbar' => $navbar]);
+		    $user = GDO_User::current();
+		    if ($user->isAuthenticated())
+		    {
+		        $count = GDO_Friendship::count($user);
+		        $link = GDT_Link::make('link_friends')->label('link_friends', [$count])->href(href('Friends', 'FriendList'));
+		        if (GDO_FriendRequest::countIncomingFor($user))
+		        {
+		            $link->icon('alert');
+		        }
+		        GDT_Page::$INSTANCE->rightNav->addField($link);
+		    }
 		}
 	}
 	
