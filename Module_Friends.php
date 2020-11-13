@@ -3,12 +3,10 @@ namespace GDO\Friends;
 
 use GDO\Core\GDO_Module;
 use GDO\Date\GDT_Duration;
-use GDO\Date\Time;
 use GDO\UI\GDT_Bar;
 use GDO\DB\GDT_Checkbox;
 use GDO\DB\GDT_Int;
 use GDO\User\GDO_User;
-use GDO\User\GDO_UserSetting;
 
 /**
  * GDO_Friendship and user relation module
@@ -80,9 +78,10 @@ final class Module_Friends extends GDO_Module
 	public function canRequest(GDO_User $to, &$reason)
 	{
 		$user = GDO_User::current();
+		$module = Module_Friends::instance();
 		
 		# Check level
-		$level = GDO_UserSetting::userGet($to, 'friendship_level')->var;
+		$level = $module->userSettingVar($to, 'friendship_level');
 		if ($level > $user->getLevel())
 		{
 			$reason = t('err_level_required', [$level]);
@@ -93,12 +92,14 @@ final class Module_Friends extends GDO_Module
 		/**
 		 * @var \GDO\Friends\GDT_ACL $setting
 		 */
-		$setting = GDO_UserSetting::userGet($to, 'friendship_who');
+		$setting = $module->userSetting($to, 'friendship_who');
 		return $setting->hasAccess($user, $to, $reason);
 	}
 	
 	public function canViewFriends(GDO_User $from, &$reason)
 	{
+		$module = Module_Friends::instance();
+
 		# Self
 		$user = GDO_User::current();
 		if ($user === $from)
@@ -110,7 +111,7 @@ final class Module_Friends extends GDO_Module
 		/**
 		 * @var \GDO\Friends\GDT_ACL $setting
 		 */
-		$setting = GDO_UserSetting::userGet($from, 'friendship_visible');
+		$setting = $module->userSetting($from, 'friendship_visible');
 		return $setting->hasAccess($user, $from, $reason);
 	}
 }
