@@ -22,7 +22,7 @@ final class Requests extends MethodQueryList
 		$list->title(t('list_friends_requests', [$list->countItems()]));
 	}
 	
-	public function gdoQuery()
+	public function getQuery()
 	{
 		$user = GDO_User::current();
 		return $this->gdoTable()->select()->where("frq_friend={$user->getID()} AND frq_denied IS NULL");

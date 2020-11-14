@@ -22,7 +22,7 @@ final class FriendList extends MethodQueryList
 		$list->title(t('list_friends', [$list->countItems()]));
 	}
 	
-	public function gdoQuery()
+	public function getQuery()
 	{
 		$user = GDO_User::current();
 		return $this->gdoTable()->select()->where("friend_user={$user->getID()}");

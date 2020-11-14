@@ -29,7 +29,7 @@ final class Requesting extends MethodQueryList
 		return $tabs->add($response);
 	}
 	
-	public function gdoQuery()
+	public function getQuery()
 	{
 		$user = GDO_User::current();
 		return $this->gdoTable()->select()->where("frq_user={$user->getID()} AND frq_denied IS NULL");
