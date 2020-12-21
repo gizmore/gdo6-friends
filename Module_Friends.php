@@ -13,7 +13,7 @@ use GDO\UI\GDT_Page;
  * GDO_Friendship and user relation module
  * 
  * @author gizmore
- * @version 6.0
+ * @version 6.10
  * @since 5.0
  */
 final class Module_Friends extends GDO_Module
@@ -25,10 +25,10 @@ final class Module_Friends extends GDO_Module
 	public function onLoadLanguage() { return $this->loadLanguage('lang/friends'); }
 	public function getClasses()
 	{
-		return array(
+		return [
 			'GDO\Friends\GDO_Friendship',
 			'GDO\Friends\GDO_FriendRequest',
-		);
+		];
 	}
 
 	##############
@@ -67,7 +67,7 @@ final class Module_Friends extends GDO_Module
 
 	public function onInitSidebar()
 	{
-// 		if ($this->cfgFriendsLink())
+		if ($this->cfgFriendsLink())
 		{
 		    $user = GDO_User::current();
 		    if ($user->isAuthenticated())
