@@ -36,7 +36,7 @@ final class GDT_FriendRelation extends GDT_Enum
 	
 	public function defaultLabel() { return $this->label('friend_relation'); }
 	
-	public function __construct()
+	protected function __construct()
 	{
 		$this->enumValues(...array_unique(array_merge(array_keys(self::$TYPES), array_values(self::$TYPES))));
 	}
