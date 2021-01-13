@@ -10,6 +10,8 @@ use GDO\DB\Query;
  * An ACL field has default ACL options.
  * It helps to construct queries to reflect ACL permission.
  * 
+ * @TODO: move to Module_Core
+ * 
  * @author gizmore@wechall.net
  * @version 6.08
  * @since 6.08
