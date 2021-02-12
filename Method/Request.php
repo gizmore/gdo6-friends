@@ -39,9 +39,9 @@ final class Request extends MethodForm
 			$form->addField($gdo->gdoColumn('frq_relation'));
 		}
 		$form->addFields(array(
-			GDT_Submit::make(),
 			GDT_AntiCSRF::make(),
 		));
+		$form->actions()->addField(GDT_Submit::make());
 	}
 	
 	public function execute()
