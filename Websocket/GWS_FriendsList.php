@@ -22,7 +22,6 @@ class GWS_FriendsList extends GWS_Command
 		$user = GDO_User::findById($msg->read32u());
 		
 		$page = $msg->read16u();
-		$_REQUEST['f']['page'] = $page; # Hack
 		
 		$reason = '';
 		if (!Module_Friends::instance()->canViewFriends($user, $reason))
@@ -32,6 +31,7 @@ class GWS_FriendsList extends GWS_Command
 
 		$query = GDO_Friendship::table()->select('user_id')->joinObject('friend_friend')->where('friend_user='.$user->getID());
 		$pagemenu = GDT_PageMenu::make()->query($query);
+		$pagemenu->page($page);
 		$pagemenu->filterQuery($query);
 		$result = $query->exec();
 		$payload = $this->pagemenuToBinary($pagemenu);
