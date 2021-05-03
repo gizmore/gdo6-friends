@@ -13,17 +13,21 @@ use GDO\DB\Query;
  * @TODO: move to Module_Core
  * 
  * @author gizmore@wechall.net
- * @version 6.08
- * @since 6.08
+ * @version 6.10.1
+ * @since 6.8.0
  */
 final class GDT_ACL extends GDT_Enum
 {
-	public function defaultLabel() { return $this->label('visibility'); }
+	const ALL = 'acl_all';
+	const MEMBERS = 'acl_members';
+	const FRIENDS = 'acl_friends';
+	const NOONE = 'acl_noone';
 	
 	protected function __construct()
 	{
-		$this->enumValues = ['acl_all', 'acl_members', 'acl_friends', 'acl_noone'];
-		$this->initial = 'acl_noone';
+	    parent::__construct();
+		$this->enumValues = [self::ALL, self::MEMBERS, self::FRIENDS, self::NOONE];
+		$this->initial = self::NOONE;
 		$this->notNull = true;
 	}
 	
@@ -37,24 +41,23 @@ final class GDT_ACL extends GDT_Enum
 	 */
 	public function hasAccess(GDO_User $user, GDO_User $target, &$reason, $throwException=true)
 	{
-// 		Logger::logDebug("ACL has access {$user->displayName()} to {$target->displayName()} via #{$this->var}");
 		# Self is fine
 		if ($user === $target) { return true; }
 		
 		# Other cases
 		switch ($this->var)
 		{
-			case 'acl_all':
+			case self::ALL:
 				return true;
 			
-			case 'acl_members':
+			case self::MEMBERS:
 				if (!$result = $user->isMember())
 				{
 					$reason = t('err_only_member_access');
 				}
 				return $result;
 			
-			case 'acl_friends':
+			case self::FRIENDS:
 				$result = module_enabled('Friends') ? GDO_Friendship::areRelated($user, $target) : false;
 				if (!$result)
 				{
@@ -62,7 +65,7 @@ final class GDT_ACL extends GDT_Enum
 				}
 				return $result;
 			
-			case 'acl_noone':
+			case self::NOONE:
 				$reason = t('err_only_private_access');
 				return false;
 			
