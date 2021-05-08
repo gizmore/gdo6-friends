@@ -112,8 +112,8 @@ final class Request extends MethodForm
 	private function sendMail(GDO_FriendRequest $request)
 	{
 		$mail = new Mail();
-		$mail->setSender(GWF_BOT_EMAIL);
-		$mail->setSenderName(GWF_BOT_NAME);
+		$mail->setSender(GDO_BOT_EMAIL);
+		$mail->setSenderName(GDO_BOT_NAME);
 		
 
 		$friend = $request->getFriend();
