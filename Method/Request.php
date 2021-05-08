@@ -47,7 +47,7 @@ final class Request extends MethodForm
 	public function execute()
 	{
 		$response = parent::execute();
-		return Module_Friends::instance()->renderTabs()->add($response);
+		return Module_Friends::instance()->renderTabs()->addField($response);
 	}
 	
 	public function validate_NoRelation(GDT_Form $form, GDT_User $field)

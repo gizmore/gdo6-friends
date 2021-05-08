@@ -35,6 +35,6 @@ final class AcceptFrom extends Method
 		$response = $this->message('msg_friends_accepted');
 		$redirect = Website::redirect(href('Friends', 'Requests'));
 		
-		return $tabs->add($response)->add($redirect);
+		return $tabs->add($response)->addField($redirect);
 	}
 }

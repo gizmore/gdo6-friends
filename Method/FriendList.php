@@ -31,6 +31,6 @@ final class FriendList extends MethodQueryList
 	public function execute()
 	{
 		$response = parent::execute();
-		return Module_Friends::instance()->renderTabs()->add($response);
+		return Module_Friends::instance()->renderTabs()->addField($response);
 	}
 }
