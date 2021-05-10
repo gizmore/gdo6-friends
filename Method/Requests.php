@@ -32,6 +32,6 @@ final class Requests extends MethodQueryList
 	{
 		$response = parent::execute();
 		$tabs = Module_Friends::instance()->renderTabs();
-		return $tabs->add($response);
+		return $tabs->addField($response);
 	}
 }

@@ -35,6 +35,6 @@ final class RemoveFrom extends Method
 		$response = $this->message('msg_request_denied');
 		$redirect = Website::redirect(href('Friends', 'Requests'));
 		
-		return $tabs->add($response)->addField($redirect);
+		return $tabs->addField($response)->addField($redirect);
 	}
 }

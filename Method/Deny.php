@@ -22,7 +22,7 @@ final class Deny extends MethodFriendRequest
 		$response = $this->message('msg_friends_denied');
 		$redirect = Website::redirect(href('Friends', 'Requests'));
 		
-		return $tabs->add($response)->addField($redirect);
+		return $tabs->addField($response)->addField($redirect);
 	}
 	
 	private function sendMail(GDO_FriendRequest $request)

@@ -26,7 +26,7 @@ final class Requesting extends MethodQueryList
 	{
 		$response = parent::execute();
 		$tabs = Module_Friends::instance()->renderTabs();
-		return $tabs->add($response);
+		return $tabs->addField($response);
 	}
 	
 	public function getQuery()

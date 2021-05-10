@@ -44,12 +44,12 @@ final class Remove extends Method
 		# Render and redirect
 		$tabs = Module_Friends::instance()->renderTabs();
 		$response = $this->message('msg_friendship_deleted', [$friendship->getFriend()->displayNameLabel()]);
-		$tabs->add($response);
+		$tabs->addField($response);
 		
 		if (Application::instance()->isHTML())
 		{
 			$redirect = Website::redirect(href('Friends', 'FriendList'));
-			$tabs->add($redirect);
+			$tabs->addField($redirect);
 		}
 		return $tabs;
 	}
