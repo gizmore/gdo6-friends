@@ -58,4 +58,5 @@ return array(
 'mail_subj_frq_denied' => '[%s] %s hat Ihre Anfrage abgelehnt',
 'mail_subj_frq_accepted' => '[%s] %s ist nun Ihr %s',
 'mail_subj_friend_removed' => '[%s] %s kündigt Ihre Freundschaft',
+'gallery_acl' => 'Gallerie Sichtbarkeit',
 );

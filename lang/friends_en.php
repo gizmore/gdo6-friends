@@ -58,4 +58,5 @@ return array(
 'mail_subj_frq_denied' => '[%s] %s denied the relationship',
 'mail_subj_frq_accepted' => '[%s] %s is now your %s',
 'mail_subj_friend_removed' => '[%s] %s removed your relationship',
+'gallery_acl' => 'Gallery visibility'
 );
