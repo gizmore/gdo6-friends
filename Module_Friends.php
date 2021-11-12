@@ -26,8 +26,8 @@ final class Module_Friends extends GDO_Module
 	public function getClasses()
 	{
 		return [
-			'GDO\Friends\GDO_Friendship',
-			'GDO\Friends\GDO_FriendRequest',
+			GDO_Friendship::class,
+			GDO_FriendRequest::class,
 		];
 	}
 
