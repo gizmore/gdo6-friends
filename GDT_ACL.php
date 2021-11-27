@@ -10,10 +10,10 @@ use GDO\DB\Query;
  * An ACL field has default ACL options.
  * It helps to construct queries to reflect ACL permission.
  * 
- * @TODO: move to Module_Core
+ * @TODO: move GDT_ACL to Module_Core
  * 
  * @author gizmore@wechall.net
- * @version 6.10.1
+ * @version 6.11.0
  * @since 6.8.0
  */
 final class GDT_ACL extends GDT_Enum
@@ -29,6 +29,7 @@ final class GDT_ACL extends GDT_Enum
 		$this->enumValues = [self::ALL, self::MEMBERS, self::FRIENDS, self::NOONE];
 		$this->initial = self::NOONE;
 		$this->notNull = true;
+		$this->icon = 'eye';
 	}
 	
 	/**
