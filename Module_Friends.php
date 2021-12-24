@@ -8,6 +8,7 @@ use GDO\DB\GDT_Checkbox;
 use GDO\DB\GDT_Int;
 use GDO\User\GDO_User;
 use GDO\UI\GDT_Page;
+use GDO\User\GDT_Level;
 
 /**
  * GDO_Friendship and user relation module
@@ -39,7 +40,7 @@ final class Module_Friends extends GDO_Module
 		return array(
 			GDT_ACL::make('friendship_who')->initial('acl_all'),
 			GDT_ACL::make('friendship_visible')->initial('acl_noone'),
-			GDT_Int::make('friendship_level')->unsigned()->initial('0'),
+			GDT_Level::make('friendship_level')->initial('0'),
 		);
 	}
 	
